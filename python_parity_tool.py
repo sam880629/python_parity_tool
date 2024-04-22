@@ -267,14 +267,15 @@ edInput = T.Entry(W, width = 20, textvariable = itemsInput)
 edInput.place(x=80, y =40)
 
 # 輸出按鈕
-btnOut = T.Button(W, text ='產出csv ', command = lambda:btn_out_click(W, web_name_array))
+btnOut = T.Button(W, text ='產生csv ', command = lambda:btn_out_click(W, web_name_array))
 btnOut.place(x=120, y=200)
 
 #價錢排序下拉選單
 order_text = T.StringVar()
 cboOrder = TTK.Combobox(W,values=['不限','找低價', '找高價'],width=5, textvariable = order_text)
-cboOrder.place(x=170, y=80)
+cboOrder.place(x=170, y=88)
 cboOrder.set('不限')
+T.Label(W, text='價錢排序').place(x=165, y=65)
 
 #複選框
 check_none_val = T.IntVar(value=1)
