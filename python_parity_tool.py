@@ -55,6 +55,7 @@ def get_data_write_to_csv(web_name, target_name, csv_writer):
     csv_writer.writerow(set_title)
     
     # 根據網站名稱取得資料
+   
     if web_name == 'Yahoo':
         GetReturn = get_yahoo(target_name)
     elif web_name == '樂天':
@@ -66,7 +67,6 @@ def get_data_write_to_csv(web_name, target_name, csv_writer):
     
     for r in GetReturn:
         csv_writer.writerow(r)
-
 
 #取得 yahoo
 def get_yahoo(goods):
@@ -89,22 +89,26 @@ def get_yahoo(goods):
         print('查無資料')
         sys.exit(0)
         
-    datas = sp.find_all('a', class_='nQTUb')
-    # print(datas)
+    first_a = sp.find('a').get('class')
+
+    datas = sp.find_all('a', class_=first_a)
+
     ReturnList = []
-    for i in range(10):
-        name = datas[i].find('span', class_='hnGvZF')#商品名稱
-        price = datas[i].find('div', class_='sc-shnyN').find('span')#商品價錢
-        url =  datas[i].get('href')#商品連結
+    try:
+        for i in range(10):
+            name = datas[i].find('span', class_='sc-dlyefy sc-gKcDdr sc-1drl28c-5')#商品名稱
+            price = datas[i].find('div', class_='sc-shnyN').find('span')#商品價錢
+            url =  datas[i].get('href')#商品連結
+            
+            setList = []
         
-        setList = []
-       
-        setList.append(name.text.strip())
-        setList.append(price.text.strip())
-        setList.append(" ")
-        setList.append(url)
-        ReturnList = ReturnList + [setList]
-    
+            setList.append(name.text.strip())
+            setList.append(price.text.strip())
+            setList.append(" ")
+            setList.append(url)
+            ReturnList = ReturnList + [setList]
+    except:
+       return ReturnList
     return ReturnList
 
 # 取得 樂天
@@ -137,24 +141,27 @@ def get_rakuten(goods):
     results = results['items']
    
     ReturnList = []
-    for i in range(10):
-        resultsSHOW = results[i]
-        item_name = resultsSHOW['itemName']
-        shop_name = resultsSHOW['shopName']
-        price_min = resultsSHOW['itemPrice']['min']
-        price_max = resultsSHOW['itemPrice']['max']
-        url = resultsSHOW['itemUrl']
-        setList = []
-        
-        #print('商品名稱: ', Show1)
-        #print('來源商家: ', Show2)
-        #print('商品金額: ', price_min, '~', price_max) 
-        #print('商品連結: ', url) 
-        setList.append(item_name)
-        setList.append(str(price_min) + '~' + str(price_max))
-        setList.append(shop_name)
-        setList.append(url)
-        ReturnList = ReturnList + [setList]
+    try:
+        for i in range(10):
+            resultsSHOW = results[i]
+            item_name = resultsSHOW['itemName']
+            shop_name = resultsSHOW['shopName']
+            price_min = resultsSHOW['itemPrice']['min']
+            price_max = resultsSHOW['itemPrice']['max']
+            url = resultsSHOW['itemUrl']
+            setList = []
+            
+            #print('商品名稱: ', Show1)
+            #print('來源商家: ', Show2)
+            #print('商品金額: ', price_min, '~', price_max) 
+            #print('商品連結: ', url) 
+            setList.append(item_name)
+            setList.append(str(price_min) + '~' + str(price_max))
+            setList.append(shop_name)
+            setList.append(url)
+            ReturnList = ReturnList + [setList]
+    except:
+         return ReturnList
     return ReturnList
     
 def get_web_content(query):
@@ -208,16 +215,19 @@ def get_momo(goods):
   
     # print('Search %d records on %s' % (len(items), today))
     ReturnList = []
-    for (i,item) in enumerate(items):
-        setList = []
-        #print(item)
-        setList.append(item['name'])
-        setList.append(item['price'])
-        setList.append(' ')
-        setList.append(item['url'])
-        ReturnList = ReturnList + [setList]
-        if i == 9:
-            break
+    try:
+        for (i,item) in enumerate(items):
+            setList = []
+            #print(item)
+            setList.append(item['name'])
+            setList.append(item['price'])
+            setList.append(' ')
+            setList.append(item['url'])
+            ReturnList = ReturnList + [setList]
+            if i == 9:
+                break
+    except:
+         return ReturnList
     return ReturnList
 
 def update_check(all_check, all_check_val, web_name_array):
