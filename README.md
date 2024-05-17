@@ -5,14 +5,14 @@
 
 ![螢幕擷取畫面 2024-04-22 101051](https://github.com/sam880629/python_parity_tool/assets/116621544/701a2345-cc23-4e18-b8ab-c35c86f1c793)
 
-*選擇要查詢的商家
+* 選擇要查詢的商家
 
 ![螢幕擷取畫面 2024-04-22 101051](https://github.com/sam880629/python_parity_tool/assets/116621544/ba28c738-e6c0-4dca-81ec-c8dc0b4b1e47)
 
-*選擇價錢的排序方式
+* 選擇價錢的排序方式
 
 ![螢幕擷取畫面 2024-04-22 101051](https://github.com/sam880629/python_parity_tool/assets/116621544/b65e773d-dc2b-49ec-901d-492de10a7ebe)
 
-*送出產出csv檔
+* 送出產出csv檔
 
 ![螢幕擷取畫面 2024-04-22 101051](https://github.com/sam880629/python_parity_tool/assets/116621544/fac44267-4cfc-484b-8004-fde34eeddeb4)
